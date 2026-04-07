@@ -2,12 +2,12 @@ namespace ItemPlanner;
 
 public class DataManager
 {
-    FileSaver fileSaver;
+    TripFileSaver fileSaver;
     public List<TripData> TripData { get; }
 
     public DataManager()
     {
-        fileSaver = new FileSaver("trip-data.txt");
+        fileSaver = new TripFileSaver("trip-data.txt");
         TripData = new List<TripData>();
 
 
@@ -22,8 +22,9 @@ public class DataManager
                     var destinationName= splitted[1];
 
                     var tripType = splitted[2];
+                    var tripPackList = splitted[3];
 
-                    TripData.Add(new TripData(tripDate,destinationName,tripType));
+                    TripData.Add(new TripData(tripDate,destinationName, tripType, tripPackList));
                 }
             }
         }
@@ -32,5 +33,5 @@ public class DataManager
     public void AddNewTripData(TripData data) {
         this.TripData.Add(data);
         this.fileSaver.AppendData(data);
-    }   
+    }        
 }
