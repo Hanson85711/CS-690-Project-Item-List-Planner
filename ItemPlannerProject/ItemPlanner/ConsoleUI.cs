@@ -51,6 +51,11 @@ public class ConsoleUI
         switch(tripManageChoice)
             {
                 case "Create a Trip":
+                    var createTripPanel = new Panel("Create a Trip")
+                        .DoubleBorder()
+                        .Padding(3, 0)
+                        .Header("Item Planner", Justify.Center);
+                    AnsiConsole.Write(createTripPanel);                    
                     ShowCreateTrip();
                     break;
                 case "View Saved Trips":
@@ -67,7 +72,27 @@ public class ConsoleUI
 
     private void ShowCreateTrip()
     {
-        AnsiConsole.MarkupLine($"You selected: [yellow]Create a Trip[/]");
+        var destination = AnsiConsole.Ask<string>("Enter your [green]destination[/]");
+        var tripDate = AnsiConsole.Prompt
+        (
+            new TextPrompt<DateTime>("Enter a [green]date[/] (e.g. 2026 04 26):")
+                .Validate(d =>
+                    d < DateTime.Today
+                        ? ValidationResult.Error("[red]Date must be today or later[/]")
+                        : ValidationResult.Success())
+        );
+
+        AnsiConsole.MarkupLine("[bold yellow]What kind of trip is this?[/]");
+        var tripTypeChoice = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+                .AddChoices("Beach Trip", "Sightseeing Trip", "Overseas Business Trip", "Enter your own"));
+
+        if (tripTypeChoice == "Enter your own")
+        {
+            tripTypeChoice = AnsiConsole.Ask<string>("Enter your [green]trip type[/]");
+        } 
+
+        AnsiConsole.MarkupLine($"You entered: [yellow]{tripTypeChoice}[/] at [blue]{destination}[/] on [green]{tripDate:yyyy-MM-dd}[/]");
     }
 
     private void ShowViewSavedTrips()
