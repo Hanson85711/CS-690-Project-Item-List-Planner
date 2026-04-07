@@ -1,13 +1,19 @@
 namespace ItemPlanner;
 
+using System.Data;
 using Spectre.Console;
 
 public class ConsoleUI
 {
+    DataManager dataManager;
+    public ConsoleUI() {
+        dataManager = new DataManager();
+    }
     public void Show()
     {
         ShowMainMenu();
     }
+
 
     private void ShowMainMenu()
     {
@@ -91,7 +97,8 @@ public class ConsoleUI
         {
             tripTypeChoice = AnsiConsole.Ask<string>("Enter your [green]trip type[/]");
         } 
-
+        TripData data = new TripData(tripDate, destination, tripTypeChoice);
+        dataManager.AddNewTripData(data);
         AnsiConsole.MarkupLine($"You entered: [yellow]{tripTypeChoice}[/] at [blue]{destination}[/] on [green]{tripDate:yyyy-MM-dd}[/]");
     }
 
