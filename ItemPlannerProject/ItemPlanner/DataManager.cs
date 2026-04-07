@@ -14,14 +14,17 @@ public class DataManager
         if(File.Exists("trip-data.txt")) {
             var tripFileContent = File.ReadAllLines("trip-data.txt");
             foreach(var line in tripFileContent) {
-                var splitted = line.Split(":",StringSplitOptions.RemoveEmptyEntries);
-                var tripDate = DateTime.Parse(splitted[0]);
+                if (!string.IsNullOrEmpty(line)) 
+                {
+                    var splitted = line.Split("::",StringSplitOptions.RemoveEmptyEntries);
+                    var tripDate = DateTime.Parse(splitted[0]);
 
-                var destinationName= splitted[1];
+                    var destinationName= splitted[1];
 
-                var tripType = splitted[2];
+                    var tripType = splitted[2];
 
-                TripData.Add(new TripData(tripDate,destinationName,tripType));
+                    TripData.Add(new TripData(tripDate,destinationName,tripType));
+                }
             }
         }
     }
@@ -29,5 +32,5 @@ public class DataManager
     public void AddNewTripData(TripData data) {
         this.TripData.Add(data);
         this.fileSaver.AppendData(data);
-    }       
+    }   
 }

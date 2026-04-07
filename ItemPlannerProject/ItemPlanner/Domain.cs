@@ -10,4 +10,8 @@ public class TripData {
         this.Destination = destination;
         this.TripType = tripType;
     }
+
+    public override string ToString() {
+        return $"{this.TripType} at {this.Destination} on {this.TripDate:yyyy-MM-dd}";
+    }
 }

@@ -16,6 +16,6 @@ public class FileSaver {
     }
 
     public void AppendData(TripData data) {
-        File.AppendAllText(this.fileName, data.TripDate + ":" + data.Destination+ ":" + data.TripType+ Environment.NewLine);
+        File.AppendAllText(this.fileName, data.TripDate + "::" + data.Destination+ "::" + data.TripType+ Environment.NewLine);
     }
 }

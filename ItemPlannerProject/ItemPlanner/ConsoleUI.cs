@@ -50,7 +50,7 @@ public class ConsoleUI
         AnsiConsole.Write(titlePanel);
         AnsiConsole.WriteLine();
 
-         var tripManageChoice = AnsiConsole.Prompt(
+        var tripManageChoice = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
                 .AddChoices("Create a Trip", "View Saved Trips", "Delete a Trip", "Return to Main Menu")); 
 
@@ -104,7 +104,9 @@ public class ConsoleUI
 
     private void ShowViewSavedTrips()
     {
-        AnsiConsole.MarkupLine($"You selected: [yellow]ViewSavedTrips[/]");
+        var savedTripChoice = AnsiConsole.Prompt(
+            new SelectionPrompt<TripData>()
+                .AddChoices(dataManager.TripData));
     }
 
     private void ShowDeleteTrip()
