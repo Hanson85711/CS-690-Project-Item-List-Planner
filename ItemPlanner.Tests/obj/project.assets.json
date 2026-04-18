@@ -294,6 +294,27 @@
           "lib/net6.0/Newtonsoft.Json.dll": {}
         }
       },
+      "Spectre.Console/0.55.0": {
+        "type": "package",
+        "dependencies": {
+          "Spectre.Console.Ansi": "0.55.0"
+        },
+        "compile": {
+          "lib/net10.0/Spectre.Console.dll": {}
+        },
+        "runtime": {
+          "lib/net10.0/Spectre.Console.dll": {}
+        }
+      },
+      "Spectre.Console.Ansi/0.55.0": {
+        "type": "package",
+        "compile": {
+          "lib/net10.0/Spectre.Console.Ansi.dll": {}
+        },
+        "runtime": {
+          "lib/net10.0/Spectre.Console.Ansi.dll": {}
+        }
+      },
       "xunit/2.9.3": {
         "type": "package",
         "dependencies": {
@@ -372,6 +393,19 @@
         },
         "build": {
           "build/net8.0/xunit.runner.visualstudio.props": {}
+        }
+      },
+      "ItemPlanner/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "Spectre.Console": "0.55.0"
+        },
+        "compile": {
+          "bin/placeholder/ItemPlanner.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ItemPlanner.dll": {}
         }
       }
     }
@@ -736,6 +770,40 @@
         "packageIcon.png"
       ]
     },
+    "Spectre.Console/0.55.0": {
+      "sha512": "2TVhUHFsDux0Z+y2Hv4bFsOMuON4SuotEEKkMparFkp5Rm259naaaEQrN4Sv6C1cbsiGKPjfkJDGgUp+hZPjTw==",
+      "type": "package",
+      "path": "spectre.console/0.55.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net10.0/Spectre.Console.dll",
+        "lib/net8.0/Spectre.Console.dll",
+        "lib/net9.0/Spectre.Console.dll",
+        "lib/netstandard2.0/Spectre.Console.dll",
+        "logo.png",
+        "spectre.console.0.55.0.nupkg.sha512",
+        "spectre.console.nuspec"
+      ]
+    },
+    "Spectre.Console.Ansi/0.55.0": {
+      "sha512": "GIfgOvuF8MpU52bprhwtDEtx0gmVIGOepM8bw0lH/TSMD0rg1Xp+5Y53kPG8rFVdcpbNANlhDQ5mEVVPO3/2Tg==",
+      "type": "package",
+      "path": "spectre.console.ansi/0.55.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net10.0/Spectre.Console.Ansi.dll",
+        "lib/net8.0/Spectre.Console.Ansi.dll",
+        "lib/net9.0/Spectre.Console.Ansi.dll",
+        "lib/netstandard2.0/Spectre.Console.Ansi.dll",
+        "logo.png",
+        "spectre.console.ansi.0.55.0.nupkg.sha512",
+        "spectre.console.ansi.nuspec"
+      ]
+    },
     "xunit/2.9.3": {
       "sha512": "TlXQBinK35LpOPKHAqbLY4xlEen9TBafjs0V5KnA4wZsoQLQJiirCR4CbIXvOH8NzkW4YeJKP5P/Bnrodm0h9Q==",
       "type": "package",
@@ -866,10 +934,16 @@
         "xunit.runner.visualstudio.3.1.4.nupkg.sha512",
         "xunit.runner.visualstudio.nuspec"
       ]
+    },
+    "ItemPlanner/1.0.0": {
+      "type": "project",
+      "path": "../ItemPlannerProject/ItemPlanner/ItemPlanner.csproj",
+      "msbuildProject": "../ItemPlannerProject/ItemPlanner/ItemPlanner.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net10.0": [
+      "ItemPlanner >= 1.0.0",
       "Microsoft.NET.Test.Sdk >= 17.14.1",
       "coverlet.collector >= 6.0.4",
       "xunit >= 2.9.3",
@@ -900,7 +974,11 @@
       "frameworks": {
         "net10.0": {
           "targetAlias": "net10.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "/workspaces/CS-690-Project-Item-List-Planner/ItemPlannerProject/ItemPlanner/ItemPlanner.csproj": {
+              "projectPath": "/workspaces/CS-690-Project-Item-List-Planner/ItemPlannerProject/ItemPlanner/ItemPlanner.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -913,7 +991,7 @@
         "auditLevel": "low",
         "auditMode": "all"
       },
-      "SdkAnalysisLevel": "10.0.100"
+      "SdkAnalysisLevel": "10.0.200"
     },
     "frameworks": {
       "net10.0": {
@@ -952,7 +1030,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/10.0.100/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/10.0.200/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(,4.7.32767]",
           "Microsoft.VisualBasic": "(,10.4.32767]",
