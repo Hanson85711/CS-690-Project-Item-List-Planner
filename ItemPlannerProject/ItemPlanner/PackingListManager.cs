@@ -6,16 +6,18 @@ public class ItemListManager
 {
     public List<PackingItem>? itemListData;
 
+    public bool FileNameChecker(string name)
+    {
+        return File.Exists(name);
+    }
+
     public string GenerateUniqueFileName()
     {
+        while (true) {
         string uniqueName = $"{Guid.NewGuid()}.txt";
-        if (!File.Exists(uniqueName))
-        {
-            return uniqueName;
-        }
-        else
-        {
-            return GenerateUniqueFileName();
+        if (!FileNameChecker(uniqueName)){
+                return uniqueName;
+            }
         }
     }
 

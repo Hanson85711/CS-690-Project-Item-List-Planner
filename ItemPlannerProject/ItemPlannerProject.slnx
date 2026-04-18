@@ -1,2 +1,4 @@
 <Solution>
+  <Project Path="../ItemPlanner.Tests/ItemPlanner.Tests.csproj" />
+  <Project Path="ItemPlanner/ItemPlanner.csproj" />
 </Solution>
