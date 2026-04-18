@@ -13,9 +13,11 @@ public class ItemListManager
 
     public string GenerateUniqueFileName()
     {
-        while (true) {
-        string uniqueName = $"{Guid.NewGuid()}.txt";
-        if (!FileNameChecker(uniqueName)){
+        while (true)
+        {
+            string uniqueName = $"{Guid.NewGuid()}.txt";
+            if (!FileNameChecker(uniqueName))
+            {
                 return uniqueName;
             }
         }
