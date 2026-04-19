@@ -5,15 +5,17 @@ public class DataManager
     TripFileSaver fileSaver;
     public List<TripData> TripData { get; }
 
-    public DataManager()
+    public DataManager() : this("trip-data.txt") { }
+
+    public DataManager(string fileName)
     {
-        fileSaver = new TripFileSaver("trip-data.txt");
+        fileSaver = new TripFileSaver(fileName);
         TripData = new List<TripData>();
 
 
-        if (File.Exists("trip-data.txt"))
+        if (File.Exists(fileName))
         {
-            var tripFileContent = File.ReadAllLines("trip-data.txt");
+            var tripFileContent = File.ReadAllLines(fileName);
             foreach (var line in tripFileContent)
             {
                 if (!string.IsNullOrEmpty(line))

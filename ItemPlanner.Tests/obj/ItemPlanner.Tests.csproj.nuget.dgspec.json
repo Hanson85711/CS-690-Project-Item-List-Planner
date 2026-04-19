@@ -56,6 +56,12 @@
               "target": "Package",
               "version": "[6.0.4, )"
             },
+            "coverlet.msbuild": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[10.0.0, )"
+            },
             "xunit": {
               "target": "Package",
               "version": "[2.9.3, )"
@@ -402,6 +408,12 @@
             "Spectre.Console": {
               "target": "Package",
               "version": "[0.55.0, )"
+            },
+            "coverlet.msbuild": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[10.0.0, )"
             }
           },
           "imports": [
