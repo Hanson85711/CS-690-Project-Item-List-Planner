@@ -9,6 +9,8 @@
 # program specific data files
 trip-data.txt
 command.txt
+#PackingLists Directory
+PackingLists/
 
 # User-specific files
 *.rsuser

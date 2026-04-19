@@ -114,16 +114,18 @@ public class ConsoleUI
             var presetChoice = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                     .AddChoices("Yes", "No"));
+            //Creates Clone Packing List .txt file based on preset
             if (presetChoice == "Yes")
             {
-                presetChoice = "presetlist1.txt";
+                string presetName = "presetlist1.txt";
                 packingListName = itemListManager.GenerateUniqueFileName();
-                File.Copy(presetChoice, packingListName, false);
+                File.Copy(presetName, Path.Combine(itemListManager.absFilePath, packingListName), true);
             }
+            //Creates Empty Packing List .txt file
             else
             {
                 packingListName = itemListManager.GenerateUniqueFileName();
-                File.Create(packingListName).Close();
+                File.Create(Path.Combine(itemListManager.absFilePath, packingListName)).Close();
             }
         }
         //Creates the TripData using the user input data and adds it to the dataManager
@@ -246,10 +248,10 @@ public class ConsoleUI
         itemListManager.ReadFile(tripChoice.ItemListName);
         var editChoice = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
-            .AddChoices("Change Item Packed Status", "Edit Item Quantity", "Add Item", "Delete Item", "[red]Back[/]"));
+            .AddChoices("Mark Items as Packed", "Edit Item Quantity", "Add Item", "Delete Item", "[red]Back[/]"));
         switch (editChoice)
         {
-            case "Change Item Packed Status":
+            case "Mark Items as Packed":
                 ChangeItemStatus(tripChoice);
                 ShowSavedTripMenu(tripChoice);
                 break;
@@ -263,11 +265,12 @@ public class ConsoleUI
                 AnsiConsole.MarkupLine($"You selected: [yellow]Delete Item[/]");
                 break;
             case "[red]Back[/]":
-                ShowSavedTripMenu(dataManager.TripData[0]);
+                ShowSavedTripMenu(tripChoice);
                 break;
         }
     }
 
+    //Function for Changing Item Packed Status
     private void ChangeItemStatus(TripData tripData)
     {
         var grouped = returnGroupedItemsByCategory(tripData);
@@ -297,6 +300,12 @@ public class ConsoleUI
             categoryToChange.AddChoice(group.Key);
             AnsiConsole.WriteLine("");
         }
+        //If Packing List is empty, force returns and ends function
+        if (!grouped.Any())
+        {
+            AnsiConsole.MarkupLine("[red]No items available.[/]");
+            return;
+        }
         //Prompts user to select a category
         var categorySelected = AnsiConsole.Prompt(categoryToChange);
         //Grabs Group based on Category Chosen
@@ -319,10 +328,7 @@ public class ConsoleUI
         {
             if (obj is PackingItem item)
             {
-                if (item.IsFullyPacked)
-                    item.QuantityPacked = 0;
-                else
-                    item.QuantityPacked = item.QuantityToPack;
+                item.QuantityPacked = item.QuantityToPack;
             }
         }
 

@@ -5,6 +5,7 @@ using System.IO;
 public abstract class FileSaverBase
 {
     protected string FileName;
+    public string itemListFolder = "ItemPlannerProject/PackingLists";
 
     public FileSaverBase(string fileName)
     {

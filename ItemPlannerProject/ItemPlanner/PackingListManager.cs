@@ -5,11 +5,18 @@ using System.IO;
 public class ItemListManager
 {
     public List<PackingItem>? itemListData;
-    PackingListSaver? fileSaver;
+    PackingListSaver? fileSaver; 
+    public string currentDir = Directory.GetCurrentDirectory();
+    public string filePath = "/PackingLists";
+    public string absFilePath = "";
 
+    public ItemListManager()
+    {
+        absFilePath = currentDir + filePath;
+    }
     public bool FileNameChecker(string name)
     {
-        return File.Exists(name);
+        return File.Exists(name); 
     }
 
     public string GenerateUniqueFileName()
@@ -26,6 +33,7 @@ public class ItemListManager
 
     public void ReadFile(string fileName)
     {
+        fileName = absFilePath + "/" + fileName;
         fileSaver = new PackingListSaver(fileName);
         if (File.Exists($"{fileName}"))
         {
@@ -48,7 +56,7 @@ public class ItemListManager
 
     public void ReWriteFile(string fileName)
     {
-        File.Create(fileName).Close();
+        File.Create(absFilePath + "/" + fileName).Close();
         if (itemListData != null)
         {
             foreach (var item in itemListData)
