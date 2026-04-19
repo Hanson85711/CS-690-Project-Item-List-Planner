@@ -5,6 +5,7 @@ using System.IO;
 public class ItemListManager
 {
     public List<PackingItem>? itemListData;
+    PackingListSaver? fileSaver;
 
     public bool FileNameChecker(string name)
     {
@@ -25,6 +26,7 @@ public class ItemListManager
 
     public void ReadFile(string fileName)
     {
+        fileSaver = new PackingListSaver(fileName);
         if (File.Exists($"{fileName}"))
         {
             itemListData = new List<PackingItem>();
@@ -41,6 +43,22 @@ public class ItemListManager
                     itemListData.Add(new PackingItem(itemName, itemsPacked, itemsToPack, category));
                 }
             }
+        }
+    }
+
+    public void ReWriteFile(string fileName)
+    {
+        File.Create(fileName).Close();
+        if (itemListData != null)
+        {
+            foreach (var item in itemListData)
+            {
+                if (this.fileSaver != null)
+                {
+                    this.fileSaver.AppendData(item);
+                }
+            }
+
         }
     }
 }

@@ -116,7 +116,9 @@ public class ConsoleUI
                     .AddChoices("Yes", "No"));
             if (presetChoice == "Yes")
             {
-                packingListName = "presetlist1.txt";
+                presetChoice = "presetlist1.txt";
+                packingListName = itemListManager.GenerateUniqueFileName();
+                File.Copy(presetChoice, packingListName, false);
             }
             else
             {
@@ -174,6 +176,42 @@ public class ConsoleUI
         AnsiConsole.MarkupLine($"You selected: [yellow]Delete a Trip[/]");
     }
 
+    private IEnumerable<IGrouping<ItemCategory, PackingItem>> returnGroupedItemsByCategory(TripData tripChoice)
+    {
+        IEnumerable<IGrouping<ItemCategory, PackingItem>> grouped;
+        if (!string.IsNullOrEmpty(tripChoice.ItemListName))
+        {
+            itemListManager.ReadFile(tripChoice.ItemListName);
+            if (itemListManager.itemListData != null)
+            {
+                grouped = itemListManager.itemListData.GroupBy(i => i.Category);
+                return grouped;
+            }
+        }
+
+        return Enumerable.Empty<IGrouping<ItemCategory, PackingItem>>();
+    }
+
+    private void ListItemsInCategory(IEnumerable<PackingItem> items)
+    {
+        foreach (var item in items)
+        {
+            var status = item.IsFullyPacked ? "[green]✔ Packed[/]" : "[yellow]In Progress[/]";
+            AnsiConsole.MarkupLine($"- {item.Name} ({item.QuantityPacked}/{item.QuantityToPack}) {status}");
+        }
+    }
+
+    private void ShowTripPackingList(TripData currentTrip)
+    {
+        var grouped = returnGroupedItemsByCategory(currentTrip);
+        foreach (var group in grouped)
+        {
+            AnsiConsole.WriteLine($"== {group.Key} ==");
+            ListItemsInCategory(group);
+            AnsiConsole.WriteLine("");
+        }
+    }
+
     private void ShowSavedTripMenu(TripData tripChoice)
     {
         //Panel For Displaying Trip Info
@@ -187,35 +225,107 @@ public class ConsoleUI
             .Header("Item Planner", Justify.Center);
 
         AnsiConsole.Write(titlePanel);
-        //Lists the current Trip's Packing List
-        if (!string.IsNullOrEmpty(tripChoice.ItemListName))
-        {
-            itemListManager.ReadFile(tripChoice.ItemListName);
-            if (itemListManager.itemListData != null)
-            {
-                var grouped = itemListManager.itemListData.GroupBy(i => i.Category);
 
-                foreach (var group in grouped)
-                {
-                    AnsiConsole.WriteLine($"== {group.Key} ==");
+        ShowTripPackingList(tripChoice);
 
-                    foreach (var item in group)
-                    {
-                        var status = item.IsFullyPacked ? "[green]✔ Packed[/]" : "[yellow]In Progress[/]";
-                        AnsiConsole.MarkupLine($"- {item.Name} ({item.QuantityPacked}/{item.QuantityToPack}) {status}");
-                    }
-
-                    AnsiConsole.WriteLine("");
-                }
-            }
-        }
-        //UNFINISHED: IMPLEMENT MORE CHOICES HERE LATER
         var tripTypeChoice = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
-            .AddChoices("[red]Back[/]"));
+            .AddChoices("Edit List", "[red]Back[/]"));
         if (tripTypeChoice == "[red]Back[/]")
         {
             ShowManageTripsMenu();
         }
+        else if (tripTypeChoice == "Edit List")
+        {
+            EditPackingList(tripChoice);
+        }
+    }
+
+    private void EditPackingList(TripData tripChoice)
+    {
+        itemListManager.ReadFile(tripChoice.ItemListName);
+        var editChoice = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+            .AddChoices("Change Item Packed Status", "Edit Item Quantity", "Add Item", "Delete Item", "[red]Back[/]"));
+        switch (editChoice)
+        {
+            case "Change Item Packed Status":
+                ChangeItemStatus(tripChoice);
+                ShowSavedTripMenu(tripChoice);
+                break;
+            case "Edit Item Quantity":
+                AnsiConsole.MarkupLine($"You selected: [yellow]Edit Item Quantity[/]");
+                break;
+            case "Add Item":
+                AnsiConsole.MarkupLine($"You selected: [yellow]Add Item[/]");
+                break;
+            case "Delete Item":
+                AnsiConsole.MarkupLine($"You selected: [yellow]Delete Item[/]");
+                break;
+            case "[red]Back[/]":
+                ShowSavedTripMenu(dataManager.TripData[0]);
+                break;
+        }
+    }
+
+    private void ChangeItemStatus(TripData tripData)
+    {
+        var grouped = returnGroupedItemsByCategory(tripData);
+
+        //Selection Prompt
+        var categoryToChange = new SelectionPrompt<ItemCategory>()
+            .Title("[green]Select Category To Edit[/]");
+
+        var itemsToChange = new MultiSelectionPrompt<object>()
+            .Title("[green]Select items to toggle packed status[/]")
+            .NotRequired()
+            .UseConverter(item =>
+            {
+                var i = (PackingItem)item;
+
+                var status = i.IsFullyPacked
+                    ? "[green]✔ Packed[/]"
+                    : "[yellow]In Progress[/]";
+
+                return $"- {i.Name} ({i.QuantityPacked}/{i.QuantityToPack}) {status}";
+            });
+
+
+        //Adds categories to list
+        foreach (var group in grouped)
+        {
+            categoryToChange.AddChoice(group.Key);
+            AnsiConsole.WriteLine("");
+        }
+        //Prompts user to select a category
+        var categorySelected = AnsiConsole.Prompt(categoryToChange);
+        //Grabs Group based on Category Chosen
+        var itemGroup = grouped.FirstOrDefault(g => g.Key == categorySelected);
+
+        //Adds Items From Selected Category To Choices
+        if (itemGroup != null)
+        {
+            foreach (var item in itemGroup)
+            {
+                itemsToChange.AddChoice(item);
+            }
+
+        }
+
+        //Prompts user to select items from list
+        var selected = AnsiConsole.Prompt(itemsToChange);
+
+        foreach (var obj in selected)
+        {
+            if (obj is PackingItem item)
+            {
+                if (item.IsFullyPacked)
+                    item.QuantityPacked = 0;
+                else
+                    item.QuantityPacked = item.QuantityToPack;
+            }
+        }
+
+        itemListManager.ReWriteFile(tripData.ItemListName);
     }
 }
