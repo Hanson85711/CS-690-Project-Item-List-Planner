@@ -4,13 +4,14 @@ public class DataManager
 {
     TripFileSaver fileSaver;
     public List<TripData> TripData { get; }
-
+    public string tripFileName;
     public DataManager() : this("trip-data.txt") { }
 
     public DataManager(string fileName)
     {
         fileSaver = new TripFileSaver(fileName);
         TripData = new List<TripData>();
+        tripFileName = fileName;
 
 
         if (File.Exists(fileName))

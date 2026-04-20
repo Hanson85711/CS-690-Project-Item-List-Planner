@@ -5,7 +5,7 @@ using System.IO;
 public class ItemListManager
 {
     public List<PackingItem>? itemListData;
-    PackingListSaver? fileSaver; 
+    PackingListSaver? fileSaver;
     public string currentDir = Directory.GetCurrentDirectory();
     public string filePath = "/PackingLists";
     public string absFilePath = "";
@@ -16,7 +16,7 @@ public class ItemListManager
     }
     public bool FileNameChecker(string name)
     {
-        return File.Exists(name); 
+        return File.Exists(name);
     }
 
     public string GenerateUniqueFileName()
@@ -67,6 +67,16 @@ public class ItemListManager
                 }
             }
 
+        }
+    }
+
+    public void DeletePackingList(string fileName)
+    {
+        fileName = absFilePath + "/" + fileName;
+        fileSaver = new PackingListSaver(fileName);
+        if (File.Exists($"{fileName}"))
+        {
+            this.fileSaver.DeleteFile(fileName);
         }
     }
 }
