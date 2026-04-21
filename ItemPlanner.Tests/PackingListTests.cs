@@ -135,7 +135,7 @@ public class ItemListManagerTests
     public void FileNameChecker_ReturnsFalse_WhenFileDoesNotExist()
     {
         var manager = new ItemListManager();
-        var nonExistentFile = "nonexistent.txt";
+        var nonExistentFile = "nonexistentname.txt";
 
 
         var result = manager.FileNameChecker(nonExistentFile);
@@ -160,12 +160,14 @@ public class ItemListManagerTests
     [Fact]
     public void ReadFile_LoadsItemsCorrectly()
     {
-        var tempFile = Path.GetTempFileName();
+        string fileName = "myTestFile.txt";
+        string path = Directory.GetCurrentDirectory() + "/PackingLists/" + "myTestFile.txt";
+        var tempFile = path;
         var testData = "T-shirt|2|5|Clothing\nToothbrush|1|1|Toiletries\nPassport|1|1|Documents";
-        File.WriteAllText(tempFile, testData);
+        File.WriteAllText(path, testData);
         var manager = new ItemListManager();
 
-        manager.ReadFile(tempFile);
+        manager.ReadFile(fileName);
 
         Assert.NotNull(manager.itemListData);
         Assert.Equal(3, manager.itemListData.Count);
@@ -184,14 +186,14 @@ public class ItemListManagerTests
     }
 
     [Fact]
-    public void ReadFile_SetsItemListDataToNull_WhenFileDoesNotExist()
+    public void ReadFile_SetsItemListDataToEmpty_WhenFileDoesNotExist()
     {
         var manager = new ItemListManager();
-        var nonExistentFile = "nonexistent.txt";
+        var nonExistentFile = "nonexistentTest.txt";
 
         manager.ReadFile(nonExistentFile);
 
-        Assert.Null(manager.itemListData);
+        Assert.Empty(manager.itemListData);
     }
 }
 
@@ -284,5 +286,235 @@ public class PackingListSaverTests
         Assert.Contains("Passport|1|1|Documents" + Environment.NewLine, fileContent);
 
         File.Delete(tempFile);
+    }
+}
+
+public class TripFileSaverTests
+{
+    [Fact]
+    public void AppendData_FormatsAndAppendsTripData()
+    {
+        var tempFile = Path.GetTempFileName();
+        var saver = new TripFileSaver(tempFile);
+        var tripData = new TripData(DateTime.Parse("2026-04-20"), "Paris", "Sightseeing", "presetlist1.txt");
+
+        saver.AppendData(tripData);
+
+        var fileContent = File.ReadAllText(tempFile);
+        var expectedLine = "04/20/2026 00:00:00::Paris::Sightseeing::presetlist1.txt" + Environment.NewLine;
+        Assert.Equal(expectedLine, fileContent);
+
+        File.Delete(tempFile);
+    }
+
+    [Fact]
+    public void AppendData_MultipleTrips_FormatsAllCorrectly()
+    {
+        var tempFile = Path.GetTempFileName();
+        var saver = new TripFileSaver(tempFile);
+        var trip1 = new TripData(DateTime.Parse("2026-04-20"), "Paris", "Sightseeing", "presetlist1.txt");
+        var trip2 = new TripData(DateTime.Parse("2026-05-01"), "Beach", "Beach Trip", "custom.txt");
+
+        saver.AppendData(trip1);
+        saver.AppendData(trip2);
+
+        var fileContent = File.ReadAllText(tempFile);
+        Assert.Contains("04/20/2026 00:00:00::Paris::Sightseeing::presetlist1.txt" + Environment.NewLine, fileContent);
+        Assert.Contains("05/01/2026 00:00:00::Beach::Beach Trip::custom.txt" + Environment.NewLine, fileContent);
+
+        File.Delete(tempFile);
+    }
+}
+
+public class AdditionalFileSaverBaseTests
+{
+    [Fact]
+    public void DeleteFile_DeletesExistingFile()
+    {
+        var tempFile = Path.GetTempFileName();
+        var fileSaver = new TripFileSaver(tempFile);
+
+        // Verify file exists
+        Assert.True(File.Exists(tempFile));
+
+        // Delete the file
+        fileSaver.DeleteFile(tempFile);
+
+        // Verify file is deleted
+        Assert.False(File.Exists(tempFile));
+    }
+}
+
+public class AdditionalItemListManagerTests
+{
+    [Fact]
+    public void ReWriteFile_RewritesAllItemsToFile()
+    {
+        var manager = new ItemListManager();
+        var tempFile = "test_rewrite.txt";
+        var fullPath = manager.absFilePath + "/" + tempFile;
+
+        // Create some test data
+        manager.itemListData = new List<PackingItem>
+        {
+            new PackingItem("T-shirt", 2, 5, ItemCategory.Clothing),
+            new PackingItem("Toothbrush", 1, 1, ItemCategory.Toiletries)
+        };
+
+        // Rewrite the file
+        manager.ReWriteFile(tempFile);
+
+        // Verify file contents
+        Assert.True(File.Exists(fullPath));
+        var fileContent = File.ReadAllText(fullPath);
+        Assert.Contains("T-shirt|2|5|Clothing" + Environment.NewLine, fileContent);
+        Assert.Contains("Toothbrush|1|1|Toiletries" + Environment.NewLine, fileContent);
+
+        File.Delete(fullPath);
+    }
+
+    [Fact]
+    public void ReWriteFile_DoesNothing_WhenItemListDataIsNull()
+    {
+        var manager = new ItemListManager();
+        var tempFile = "test_rewrite_null.txt";
+        var fullPath = manager.absFilePath + "/" + tempFile;
+
+        // Set itemListData to null
+        manager.itemListData = null;
+
+        // Rewrite the file
+        manager.ReWriteFile(tempFile);
+
+        // Verify file exists but is empty
+        Assert.True(File.Exists(fullPath));
+        var fileContent = File.ReadAllText(fullPath);
+        Assert.Equal("", fileContent);
+
+        File.Delete(fullPath);
+    }
+
+    [Fact]
+    public void DeletePackingList_DeletesFile_WhenFileExists()
+    {
+        var manager = new ItemListManager();
+        var tempFile = "test_delete.txt";
+        var fullPath = manager.absFilePath + "/" + tempFile;
+
+        // Create a file
+        File.WriteAllText(fullPath, "test content");
+
+        // Verify file exists
+        Assert.True(File.Exists(fullPath));
+
+        // Delete the packing list
+        manager.DeletePackingList(tempFile);
+
+        // Verify file is deleted
+        Assert.False(File.Exists(fullPath));
+    }
+}
+
+public class AdditionalDataManagerTests
+{
+    [Fact]
+    public void Constructor_HandlesEmptyFile()
+    {
+        var tempFile = Path.GetTempFileName();
+        File.WriteAllText(tempFile, ""); // Empty file
+
+        var dataManager = new DataManager(tempFile);
+
+        Assert.Empty(dataManager.TripData);
+
+        File.Delete(tempFile);
+    }
+
+    [Fact]
+    public void Constructor_HandlesFileWithEmptyLines()
+    {
+        var tempFile = Path.GetTempFileName();
+        var testData = "2026-04-20::Paris::Sightseeing::presetlist1.txt\n\n2026-05-01::Beach::Beach Trip::custom.txt\n";
+        File.WriteAllText(tempFile, testData);
+
+        var dataManager = new DataManager(tempFile);
+
+        Assert.Equal(2, dataManager.TripData.Count);
+        Assert.Equal("Paris", dataManager.TripData[0].Destination);
+        Assert.Equal("Beach", dataManager.TripData[1].Destination);
+
+        File.Delete(tempFile);
+    }
+
+    [Fact]
+    public void DefaultConstructor_UsesDefaultFileName()
+    {
+        var dataManager = new DataManager();
+
+        Assert.Equal("trip-data.txt", dataManager.tripFileName);
+    }
+}
+
+public class AdditionalTripDataTests
+{
+    [Fact]
+    public void ToString_FormatsDateCorrectly()
+    {
+        var date = DateTime.Parse("2026-12-25");
+        var tripData = new TripData(date, "New York", "Holiday", "holiday.txt");
+
+        var result = tripData.ToString();
+
+        Assert.Equal("Holiday at New York on 2026-12-25", result);
+    }
+
+    [Fact]
+    public void ToString_HandlesDifferentDateFormats()
+    {
+        var date = DateTime.Parse("2026-01-01");
+        var tripData = new TripData(date, "Tokyo", "New Year", "ny.txt");
+
+        var result = tripData.ToString();
+
+        Assert.Equal("New Year at Tokyo on 2026-01-01", result);
+    }
+}
+
+public class AdditionalPackingItemTests
+{
+    [Fact]
+    public void Constructor_HandlesZeroQuantities()
+    {
+        var item = new PackingItem("Empty Item", 0, 0, ItemCategory.Misc);
+
+        Assert.Equal("Empty Item", item.Name);
+        Assert.Equal(0, item.QuantityPacked);
+        Assert.Equal(0, item.QuantityToPack);
+        Assert.Equal(ItemCategory.Misc, item.Category);
+        Assert.True(item.IsFullyPacked); // 0 >= 0 is true
+    }
+
+    [Fact]
+    public void Constructor_HandlesLargeQuantities()
+    {
+        var item = new PackingItem("Bulk Item", 1000, 500, ItemCategory.Clothing);
+
+        Assert.Equal("Bulk Item", item.Name);
+        Assert.Equal(1000, item.QuantityPacked);
+        Assert.Equal(500, item.QuantityToPack);
+        Assert.Equal(ItemCategory.Clothing, item.Category);
+        Assert.True(item.IsFullyPacked); // 1000 >= 500 is true
+    }
+
+    [Theory]
+    [InlineData("Electronics", ItemCategory.Electronics)]
+    [InlineData("Documents", ItemCategory.Documents)]
+    [InlineData("Misc", ItemCategory.Misc)]
+    public void Constructor_SetsAllCategoriesCorrectly(string name, ItemCategory category)
+    {
+        var item = new PackingItem(name, 1, 1, category);
+
+        Assert.Equal(category, item.Category);
+        Assert.True(item.IsFullyPacked);
     }
 }

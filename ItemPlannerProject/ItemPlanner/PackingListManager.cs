@@ -58,6 +58,11 @@ public class ItemListManager
     public void ReWriteFile(string fileName)
     {
         File.Create(absFilePath + "/" + fileName).Close();
+        if (this.fileSaver == null)
+        {
+            this.fileSaver = new PackingListSaver(absFilePath + "/" + fileName);
+        }
+        
         if (itemListData != null)
         {
             foreach (var item in itemListData)
@@ -67,7 +72,6 @@ public class ItemListManager
                     this.fileSaver.AppendData(item);
                 }
             }
-
         }
     }
 

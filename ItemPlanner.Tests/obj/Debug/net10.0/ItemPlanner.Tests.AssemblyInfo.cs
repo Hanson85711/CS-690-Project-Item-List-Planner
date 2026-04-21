@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ItemPlanner.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ddd573a5ddee605e8c5663b17ebbe994938e863c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3e4076bb506899113918f20d4a616061964e51c1")]
 [assembly: System.Reflection.AssemblyProductAttribute("ItemPlanner.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ItemPlanner.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

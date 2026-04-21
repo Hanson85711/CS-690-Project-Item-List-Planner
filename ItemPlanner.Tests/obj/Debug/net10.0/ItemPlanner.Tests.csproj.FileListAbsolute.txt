@@ -103,3 +103,4 @@
 /workspaces/CS-690-Project-Item-List-Planner/ItemPlanner.Tests/obj/Debug/net10.0/ItemPlanner.Tests.pdb
 /workspaces/CS-690-Project-Item-List-Planner/ItemPlanner.Tests/obj/Debug/net10.0/ItemPlanner.Tests.genruntimeconfig.cache
 /workspaces/CS-690-Project-Item-List-Planner/ItemPlanner.Tests/obj/Debug/net10.0/ref/ItemPlanner.Tests.dll
+/workspaces/CS-690-Project-Item-List-Planner/ItemPlanner.Tests/bin/Debug/net10.0/presetlist1.txt
