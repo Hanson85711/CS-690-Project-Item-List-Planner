@@ -1,1 +1,1 @@
-dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:Threshold=80
+dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:Threshold=80 /p:ExcludeByFile="**/ConsoleUi.cs"

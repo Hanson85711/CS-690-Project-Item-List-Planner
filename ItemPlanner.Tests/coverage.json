@@ -1,0 +1,892 @@
+{
+  "ItemPlanner.dll": {
+    "/workspaces/CS-690-Project-Item-List-Planner/ItemPlannerProject/ItemPlanner/ConsoleUI.cs": {
+      "ItemPlanner.ConsoleUI": {
+        "System.Void ItemPlanner.ConsoleUI::Show()": {
+          "Lines": {
+            "17": 0,
+            "18": 0,
+            "19": 0
+          },
+          "Branches": []
+        },
+        "System.Void ItemPlanner.ConsoleUI::ShowMainMenu()": {
+          "Lines": {
+            "23": 0,
+            "25": 0,
+            "26": 0,
+            "27": 0,
+            "28": 0,
+            "30": 0,
+            "31": 0,
+            "32": 0,
+            "33": 0,
+            "34": 0,
+            "36": 0,
+            "38": 0,
+            "39": 0,
+            "40": 0,
+            "41": 0,
+            "42": 0
+          },
+          "Branches": [
+            {
+              "Line": 38,
+              "Offset": 126,
+              "EndOffset": 128,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 38,
+              "Offset": 126,
+              "EndOffset": 137,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void ItemPlanner.ConsoleUI::ShowManageTripsMenu()": {
+          "Lines": {
+            "45": 0,
+            "48": 0,
+            "49": 0,
+            "50": 0,
+            "51": 0,
+            "53": 0,
+            "54": 0,
+            "56": 0,
+            "57": 0,
+            "58": 0,
+            "60": 0,
+            "63": 0,
+            "64": 0,
+            "65": 0,
+            "66": 0,
+            "67": 0,
+            "68": 0,
+            "69": 0,
+            "71": 0,
+            "72": 0,
+            "74": 0,
+            "75": 0,
+            "77": 0,
+            "78": 0,
+            "80": 0
+          },
+          "Branches": [
+            {
+              "Line": 60,
+              "Offset": 124,
+              "EndOffset": 126,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 60,
+              "Offset": 137,
+              "EndOffset": 139,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 60,
+              "Offset": 150,
+              "EndOffset": 152,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 60,
+              "Offset": 124,
+              "EndOffset": 167,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 60,
+              "Offset": 137,
+              "EndOffset": 222,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 60,
+              "Offset": 150,
+              "EndOffset": 231,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 60,
+              "Offset": 163,
+              "EndOffset": 240,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 0
+            },
+            {
+              "Line": 60,
+              "Offset": 163,
+              "EndOffset": 249,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void ItemPlanner.ConsoleUI::ShowCreateTrip()": {
+          "Lines": {
+            "83": 0,
+            "85": 0,
+            "87": 0,
+            "88": 0,
+            "89": 0,
+            "90": 0,
+            "91": 0,
+            "92": 0,
+            "93": 0,
+            "94": 0,
+            "96": 0,
+            "100": 0,
+            "101": 0,
+            "102": 0,
+            "104": 0,
+            "105": 0,
+            "106": 0,
+            "108": 0,
+            "109": 0,
+            "110": 0,
+            "112": 0,
+            "113": 0,
+            "114": 0,
+            "115": 0,
+            "116": 0,
+            "117": 0,
+            "118": 0,
+            "119": 0,
+            "120": 0,
+            "122": 0,
+            "123": 0,
+            "124": 0,
+            "125": 0,
+            "126": 0,
+            "128": 0,
+            "129": 0,
+            "130": 0,
+            "131": 0,
+            "132": 0
+          },
+          "Branches": [
+            {
+              "Line": 104,
+              "Offset": 145,
+              "EndOffset": 147,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 104,
+              "Offset": 145,
+              "EndOffset": 186,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 117,
+              "Offset": 253,
+              "EndOffset": 255,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 117,
+              "Offset": 253,
+              "EndOffset": 265,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 91,
+              "Offset": 11,
+              "EndOffset": 13,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 91,
+              "Offset": 11,
+              "EndOffset": 20,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void ItemPlanner.ConsoleUI::ShowViewSavedTrips()": {
+          "Lines": {
+            "135": 0,
+            "138": 0,
+            "139": 0,
+            "140": 0,
+            "141": 0,
+            "142": 0,
+            "143": 0,
+            "144": 0,
+            "147": 0,
+            "148": 0,
+            "149": 0,
+            "150": 0,
+            "151": 0,
+            "153": 0,
+            "154": 0,
+            "155": 0,
+            "156": 0,
+            "157": 0,
+            "160": 0,
+            "161": 0,
+            "163": 0,
+            "164": 0,
+            "166": 0,
+            "167": 0,
+            "168": 0,
+            "169": 0,
+            "170": 0
+          },
+          "Branches": [
+            {
+              "Line": 160,
+              "Offset": 150,
+              "EndOffset": 152,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 160,
+              "Offset": 150,
+              "EndOffset": 163,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void ItemPlanner.ConsoleUI::ShowDeleteTrip()": {
+          "Lines": {
+            "173": 0,
+            "174": 0,
+            "175": 0
+          },
+          "Branches": []
+        },
+        "System.Void ItemPlanner.ConsoleUI::ShowSavedTripMenu(ItemPlanner.TripData)": {
+          "Lines": {
+            "178": 0,
+            "180": 0,
+            "181": 0,
+            "182": 0,
+            "183": 0,
+            "184": 0,
+            "185": 0,
+            "186": 0,
+            "187": 0,
+            "189": 0,
+            "191": 0,
+            "192": 0,
+            "193": 0,
+            "194": 0,
+            "195": 0,
+            "196": 0,
+            "198": 0,
+            "199": 0,
+            "200": 0,
+            "202": 0,
+            "203": 0,
+            "204": 0,
+            "205": 0,
+            "206": 0,
+            "208": 0,
+            "209": 0,
+            "210": 0,
+            "211": 0,
+            "213": 0,
+            "214": 0,
+            "215": 0,
+            "216": 0,
+            "217": 0,
+            "218": 0,
+            "219": 0,
+            "220": 0
+          },
+          "Branches": [
+            {
+              "Line": 191,
+              "Offset": 196,
+              "EndOffset": 201,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 194,
+              "Offset": 238,
+              "EndOffset": 243,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 198,
+              "Offset": 605,
+              "EndOffset": 308,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 0
+            },
+            {
+              "Line": 202,
+              "Offset": 566,
+              "EndOffset": 396,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 0
+            },
+            {
+              "Line": 204,
+              "Offset": 413,
+              "EndOffset": 415,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 204,
+              "Offset": 413,
+              "EndOffset": 422,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 202,
+              "Offset": 566,
+              "EndOffset": 571,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 198,
+              "Offset": 605,
+              "EndOffset": 610,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 0
+            },
+            {
+              "Line": 194,
+              "Offset": 238,
+              "EndOffset": 626,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 191,
+              "Offset": 196,
+              "EndOffset": 627,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 216,
+              "Offset": 672,
+              "EndOffset": 674,
+              "Path": 0,
+              "Ordinal": 10,
+              "Hits": 0
+            },
+            {
+              "Line": 216,
+              "Offset": 672,
+              "EndOffset": 683,
+              "Path": 1,
+              "Ordinal": 11,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void ItemPlanner.ConsoleUI::.ctor()": {
+          "Lines": {
+            "11": 0,
+            "12": 0,
+            "13": 0,
+            "14": 0,
+            "15": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/workspaces/CS-690-Project-Item-List-Planner/ItemPlannerProject/ItemPlanner/DataManager.cs": {
+      "ItemPlanner.DataManager": {
+        "System.Collections.Generic.List`1<ItemPlanner.TripData> ItemPlanner.DataManager::get_TripData()": {
+          "Lines": {
+            "6": 9
+          },
+          "Branches": []
+        },
+        "System.Void ItemPlanner.DataManager::AddNewTripData(ItemPlanner.TripData)": {
+          "Lines": {
+            "38": 1,
+            "39": 1,
+            "40": 1,
+            "41": 1
+          },
+          "Branches": []
+        },
+        "System.Void ItemPlanner.DataManager::.ctor()": {
+          "Lines": {
+            "8": 0
+          },
+          "Branches": []
+        },
+        "System.Void ItemPlanner.DataManager::.ctor(System.String)": {
+          "Lines": {
+            "10": 3,
+            "11": 3,
+            "12": 3,
+            "13": 3,
+            "16": 3,
+            "17": 3,
+            "18": 3,
+            "19": 13,
+            "20": 2,
+            "21": 2,
+            "22": 2,
+            "23": 2,
+            "24": 2,
+            "26": 2,
+            "28": 2,
+            "29": 2,
+            "31": 2,
+            "32": 2,
+            "33": 2,
+            "34": 3,
+            "35": 3
+          },
+          "Branches": [
+            {
+              "Line": 16,
+              "Offset": 39,
+              "EndOffset": 41,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 3
+            },
+            {
+              "Line": 19,
+              "Offset": 158,
+              "EndOffset": 56,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 2
+            },
+            {
+              "Line": 21,
+              "Offset": 76,
+              "EndOffset": 78,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 2
+            },
+            {
+              "Line": 21,
+              "Offset": 76,
+              "EndOffset": 149,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 2
+            },
+            {
+              "Line": 19,
+              "Offset": 158,
+              "EndOffset": 160,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 3
+            },
+            {
+              "Line": 16,
+              "Offset": 39,
+              "EndOffset": 161,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 3
+            }
+          ]
+        }
+      }
+    },
+    "/workspaces/CS-690-Project-Item-List-Planner/ItemPlannerProject/ItemPlanner/Domain.cs": {
+      "ItemPlanner.TripData": {
+        "System.DateTime ItemPlanner.TripData::get_TripDate()": {
+          "Lines": {
+            "5": 3
+          },
+          "Branches": []
+        },
+        "System.String ItemPlanner.TripData::get_Destination()": {
+          "Lines": {
+            "6": 6
+          },
+          "Branches": []
+        },
+        "System.String ItemPlanner.TripData::get_TripType()": {
+          "Lines": {
+            "7": 3
+          },
+          "Branches": []
+        },
+        "System.String ItemPlanner.TripData::get_ItemListName()": {
+          "Lines": {
+            "8": 7
+          },
+          "Branches": []
+        },
+        "System.String ItemPlanner.TripData::ToString()": {
+          "Lines": {
+            "19": 1,
+            "20": 1,
+            "21": 1
+          },
+          "Branches": []
+        },
+        "System.Void ItemPlanner.TripData::.ctor(System.DateTime,System.String,System.String,System.String)": {
+          "Lines": {
+            "10": 5,
+            "11": 5,
+            "12": 5,
+            "13": 5,
+            "14": 5,
+            "15": 5,
+            "16": 5
+          },
+          "Branches": []
+        }
+      },
+      "ItemPlanner.Options": {
+        "System.String ItemPlanner.Options::get_Display()": {
+          "Lines": {
+            "25": 0
+          },
+          "Branches": []
+        }
+      },
+      "ItemPlanner.TripOptions": {
+        "ItemPlanner.TripData ItemPlanner.TripOptions::get_Trip()": {
+          "Lines": {
+            "30": 0
+          },
+          "Branches": []
+        }
+      },
+      "ItemPlanner.PackingItem": {
+        "System.String ItemPlanner.PackingItem::get_Name()": {
+          "Lines": {
+            "43": 20
+          },
+          "Branches": []
+        },
+        "System.Int32 ItemPlanner.PackingItem::get_QuantityPacked()": {
+          "Lines": {
+            "44": 22
+          },
+          "Branches": []
+        },
+        "System.Int32 ItemPlanner.PackingItem::get_QuantityToPack()": {
+          "Lines": {
+            "45": 14
+          },
+          "Branches": []
+        },
+        "ItemPlanner.ItemCategory ItemPlanner.PackingItem::get_Category()": {
+          "Lines": {
+            "46": 12
+          },
+          "Branches": []
+        },
+        "System.Boolean ItemPlanner.PackingItem::get_IsFullyPacked()": {
+          "Lines": {
+            "49": 4
+          },
+          "Branches": []
+        },
+        "System.Void ItemPlanner.PackingItem::.ctor(System.String,System.Int32,System.Int32,ItemPlanner.ItemCategory)": {
+          "Lines": {
+            "51": 8,
+            "52": 8,
+            "53": 8,
+            "54": 8,
+            "55": 8,
+            "56": 8,
+            "57": 8
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/workspaces/CS-690-Project-Item-List-Planner/ItemPlannerProject/ItemPlanner/FileSaver.cs": {
+      "ItemPlanner.FileSaverBase": {
+        "System.Void ItemPlanner.FileSaverBase::AppendLine(System.String)": {
+          "Lines": {
+            "20": 0,
+            "21": 0,
+            "22": 0
+          },
+          "Branches": []
+        },
+        "System.Void ItemPlanner.FileSaverBase::.ctor(System.String)": {
+          "Lines": {
+            "9": 3,
+            "10": 3,
+            "11": 3,
+            "13": 3,
+            "14": 1,
+            "15": 1,
+            "16": 1,
+            "17": 3
+          },
+          "Branches": [
+            {
+              "Line": 13,
+              "Offset": 31,
+              "EndOffset": 33,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 13,
+              "Offset": 31,
+              "EndOffset": 52,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 3
+            }
+          ]
+        }
+      },
+      "ItemPlanner.TripFileSaver": {
+        "System.Void ItemPlanner.TripFileSaver::AppendData(ItemPlanner.TripData)": {
+          "Lines": {
+            "30": 1,
+            "31": 1,
+            "32": 1,
+            "33": 1
+          },
+          "Branches": []
+        },
+        "System.Void ItemPlanner.TripFileSaver::.ctor(System.String)": {
+          "Lines": {
+            "27": 9
+          },
+          "Branches": []
+        }
+      },
+      "ItemPlanner.PackingListSaver": {
+        "System.Void ItemPlanner.PackingListSaver::AppendData(ItemPlanner.PackingItem)": {
+          "Lines": {
+            "41": 0,
+            "42": 0,
+            "43": 0,
+            "44": 0
+          },
+          "Branches": []
+        },
+        "System.Void ItemPlanner.PackingListSaver::.ctor(System.String)": {
+          "Lines": {
+            "38": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/workspaces/CS-690-Project-Item-List-Planner/ItemPlannerProject/ItemPlanner/PackingListManager.cs": {
+      "ItemPlanner.ItemListManager": {
+        "System.Boolean ItemPlanner.ItemListManager::FileNameChecker(System.String)": {
+          "Lines": {
+            "10": 4,
+            "11": 4,
+            "12": 4
+          },
+          "Branches": []
+        },
+        "System.String ItemPlanner.ItemListManager::GenerateUniqueFileName()": {
+          "Lines": {
+            "15": 2,
+            "16": 2,
+            "17": 2,
+            "18": 2,
+            "19": 2,
+            "20": 2,
+            "21": 2,
+            "23": 0,
+            "24": 2
+          },
+          "Branches": [
+            {
+              "Line": 19,
+              "Offset": 59,
+              "EndOffset": 61,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 2
+            },
+            {
+              "Line": 19,
+              "Offset": 59,
+              "EndOffset": 66,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void ItemPlanner.ItemListManager::ReadFile(System.String)": {
+          "Lines": {
+            "27": 2,
+            "28": 2,
+            "29": 1,
+            "30": 1,
+            "31": 1,
+            "32": 9,
+            "33": 3,
+            "34": 3,
+            "35": 3,
+            "36": 3,
+            "37": 3,
+            "38": 3,
+            "39": 3,
+            "40": 3,
+            "41": 3,
+            "42": 3,
+            "43": 3,
+            "44": 1,
+            "45": 2
+          },
+          "Branches": [
+            {
+              "Line": 28,
+              "Offset": 3,
+              "EndOffset": 5,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 28,
+              "Offset": 3,
+              "EndOffset": 11,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            },
+            {
+              "Line": 28,
+              "Offset": 18,
+              "EndOffset": 23,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 1
+            },
+            {
+              "Line": 31,
+              "Offset": 37,
+              "EndOffset": 39,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 31,
+              "Offset": 37,
+              "EndOffset": 45,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 1
+            },
+            {
+              "Line": 32,
+              "Offset": 171,
+              "EndOffset": 58,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 3
+            },
+            {
+              "Line": 34,
+              "Offset": 78,
+              "EndOffset": 80,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 3
+            },
+            {
+              "Line": 34,
+              "Offset": 78,
+              "EndOffset": 162,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 3
+            },
+            {
+              "Line": 32,
+              "Offset": 171,
+              "EndOffset": 173,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 1
+            },
+            {
+              "Line": 28,
+              "Offset": 18,
+              "EndOffset": 174,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 2
+            }
+          ]
+        }
+      }
+    },
+    "/workspaces/CS-690-Project-Item-List-Planner/ItemPlannerProject/ItemPlanner/Program.cs": {
+      "ItemPlanner.Program": {
+        "System.Void ItemPlanner.Program::Main(System.String[])": {
+          "Lines": {
+            "6": 0,
+            "7": 0,
+            "8": 0,
+            "9": 0
+          },
+          "Branches": []
+        }
+      }
+    }
+  }
+}

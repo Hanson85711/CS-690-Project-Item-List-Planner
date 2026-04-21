@@ -1,10 +1,12 @@
 namespace ItemPlanner;
+
 using System.IO;
 
 
 public abstract class FileSaverBase
 {
     protected string FileName;
+    public string itemListFolder = Directory.GetCurrentDirectory() + "/PackingLists";
 
     public FileSaverBase(string fileName)
     {
@@ -19,6 +21,26 @@ public abstract class FileSaverBase
     public void AppendLine(string line)
     {
         File.AppendAllText(FileName, line + Environment.NewLine);
+    }
+
+    public void DeleteFile(string fileName)
+    {
+        try
+        {
+            if (File.Exists(fileName))
+            {
+                File.Delete(fileName);
+                Console.WriteLine("Reached here succesfully.");
+            }
+        }
+        catch (IOException ioExp)
+        {
+            Console.WriteLine($"Error: File is in use. {ioExp.Message}");
+        }
+        catch (UnauthorizedAccessException authExp)
+        {
+            Console.WriteLine($"Error: Permission denied. {authExp.Message}");
+        }
     }
 }
 

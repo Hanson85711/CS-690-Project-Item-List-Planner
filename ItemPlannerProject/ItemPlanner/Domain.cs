@@ -55,6 +55,4 @@ public class PackingItem
         this.QuantityToPack = quantityToPack;
         this.Category = category;
     }
-
 }
-

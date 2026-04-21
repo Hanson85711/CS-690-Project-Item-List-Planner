@@ -5,22 +5,36 @@ using System.IO;
 public class ItemListManager
 {
     public List<PackingItem>? itemListData;
+    PackingListSaver? fileSaver;
+    public string currentDir = Directory.GetCurrentDirectory();
+    public string filePath = "/PackingLists";
+    public string absFilePath = "";
+
+    public ItemListManager()
+    {
+        absFilePath = currentDir + filePath;
+    }
+    public bool FileNameChecker(string name)
+    {
+        return File.Exists(name);
+    }
 
     public string GenerateUniqueFileName()
     {
-        string uniqueName = $"{Guid.NewGuid()}.txt";
-        if (!File.Exists(uniqueName))
+        while (true)
         {
-            return uniqueName;
-        }
-        else
-        {
-            return GenerateUniqueFileName();
+            string uniqueName = $"{Guid.NewGuid()}.txt";
+            if (!FileNameChecker(uniqueName))
+            {
+                return uniqueName;
+            }
         }
     }
 
     public void ReadFile(string fileName)
     {
+        fileName = absFilePath + "/" + fileName;
+        fileSaver = new PackingListSaver(fileName);
         if (File.Exists($"{fileName}"))
         {
             itemListData = new List<PackingItem>();
@@ -37,6 +51,32 @@ public class ItemListManager
                     itemListData.Add(new PackingItem(itemName, itemsPacked, itemsToPack, category));
                 }
             }
+        }
+    }
+
+    public void ReWriteFile(string fileName)
+    {
+        File.Create(absFilePath + "/" + fileName).Close();
+        if (itemListData != null)
+        {
+            foreach (var item in itemListData)
+            {
+                if (this.fileSaver != null)
+                {
+                    this.fileSaver.AppendData(item);
+                }
+            }
+
+        }
+    }
+
+    public void DeletePackingList(string fileName)
+    {
+        fileName = absFilePath + "/" + fileName;
+        fileSaver = new PackingListSaver(fileName);
+        if (File.Exists($"{fileName}"))
+        {
+            this.fileSaver.DeleteFile(fileName);
         }
     }
 }

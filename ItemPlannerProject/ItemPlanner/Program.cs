@@ -1,4 +1,4 @@
-﻿namespace ItemPlanner;
+namespace ItemPlanner;
 
 class Program
 {
