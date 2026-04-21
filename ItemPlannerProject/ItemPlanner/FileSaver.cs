@@ -30,7 +30,6 @@ public abstract class FileSaverBase
             if (File.Exists(fileName))
             {
                 File.Delete(fileName);
-                Console.WriteLine("Reached here succesfully.");
             }
         }
         catch (IOException ioExp)
