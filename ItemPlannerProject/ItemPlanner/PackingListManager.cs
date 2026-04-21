@@ -13,6 +13,7 @@ public class ItemListManager
     public ItemListManager()
     {
         absFilePath = currentDir + filePath;
+        Directory.CreateDirectory(absFilePath);
     }
     public bool FileNameChecker(string name)
     {
