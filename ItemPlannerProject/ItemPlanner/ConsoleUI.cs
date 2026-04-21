@@ -292,7 +292,7 @@ public class ConsoleUI
                 AddItem(tripChoice);
                 break;
             case "Delete Item":
-                AnsiConsole.MarkupLine($"You selected: [yellow]Delete Item[/]");
+                ShowDeleteItem(tripChoice);
                 break;
             case "[red]Back[/]":
                 ShowSavedTripMenu(tripChoice);
@@ -478,7 +478,7 @@ public class ConsoleUI
         var categoryValues = Enum.GetValues<ItemCategory>();
 
         var categoryChoices = new SelectionPrompt<ItemCategory>()
-        .Title("[green]Select the [green]Category[/] for this item[/]");
+        .Title("Select the [green]Category[/] for this item");
 
         foreach (var category in categoryValues)
         {
@@ -496,6 +496,79 @@ public class ConsoleUI
         }
 
         itemListManager.ReWriteFile(tripData.ItemListName);
+
+        ShowSavedTripMenu(tripData);
+    }
+
+    private void ShowDeleteItem(TripData tripData)
+    {
+        var grouped = returnGroupedItemsByCategory(tripData);
+
+        //Selection Prompt
+        var categoryToChange = new SelectionPrompt<object>()
+            .Title("[green]Select a Category[/]");
+
+        var itemToChange = new SelectionPrompt<object>()
+            .Title("[green]Select item to delete[/]")
+            .UseConverter(item =>
+            {
+                var i = (PackingItem)item;
+
+                var status = i.IsFullyPacked
+                    ? "[green]✔ Packed[/]"
+                    : "[yellow]In Progress[/]";
+
+                return $"- {i.Name} ({i.QuantityPacked}/{i.QuantityToPack}) {status}";
+            });
+
+
+        //Adds categories to list
+        foreach (var group in grouped)
+        {
+            categoryToChange.AddChoice(group.Key);
+            AnsiConsole.WriteLine("");
+        }
+        categoryToChange.AddChoice("[red]Back[/]");
+
+        //If Packing List is empty, force returns and ends function
+        if (!grouped.Any())
+        {
+            AnsiConsole.MarkupLine("[red]No items available to edit.[/]");
+            ShowSavedTripMenu(tripData);
+            return;
+        }
+
+        //Prompts user to select a category
+        var categorySelected = AnsiConsole.Prompt(categoryToChange);
+        // If user selected the back option
+        if (categorySelected is string)
+        {
+            EditPackingList(tripData);
+            return;
+        }
+        //Grabs Group based on Category Chosen
+        var itemGroup = grouped.FirstOrDefault(g => g.Key == (ItemCategory)categorySelected);
+
+        //Adds Items From Selected Category To Choices
+        if (itemGroup != null)
+        {
+            foreach (var item in itemGroup)
+            {
+                itemToChange.AddChoice(item);
+            }
+
+        }
+
+        // Prompt user to select item
+        PackingItem selected = (PackingItem)AnsiConsole.Prompt(itemToChange);
+
+        if (itemListManager.itemListData != null)
+        {
+            int itemIndex = itemListManager.itemListData.IndexOf(selected);
+
+            itemListManager.itemListData.Remove(selected);
+            itemListManager.ReWriteFile(tripData.ItemListName);
+        }
 
         ShowSavedTripMenu(tripData);
     }
