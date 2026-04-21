@@ -4,7 +4,13 @@ class Program
 {
     static void Main(string[] args)
     {
-        ConsoleUI theUI = new ConsoleUI();
-        theUI.Show();
+        var dataManager = new DataManager();
+        var itemListManager = new ItemListManager();
+
+        var consoleUI = new ConsoleUI(dataManager, itemListManager);
+        var packingUI = new PackingListUI(itemListManager, consoleUI);
+        
+        consoleUI.SetPackingUI(packingUI);
+        consoleUI.Show();
     }
 }
