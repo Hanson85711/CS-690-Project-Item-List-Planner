@@ -15,4 +15,10 @@
     <PackageReference Include="Spectre.Console" Version="0.55.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="presetlist1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  
 </Project>
