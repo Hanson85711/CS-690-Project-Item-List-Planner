@@ -9,6 +9,7 @@
 # program specific data files
 trip-data.txt
 command.txt
+
 #PackingLists Directory
 PackingLists/
 
