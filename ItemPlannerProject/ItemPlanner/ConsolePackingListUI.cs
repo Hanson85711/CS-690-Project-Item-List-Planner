@@ -40,6 +40,17 @@ public class PackingListUI
         }
     }
 
+    private void ListItemsToBuy(IEnumerable<PackingItem> items)
+    {
+        foreach (var item in items)
+        {
+            if (!item.IsFullyPacked)
+            {
+                AnsiConsole.MarkupLine($"- {item.Name} ({item.QuantityToPack - item.QuantityPacked})");
+            }
+        }
+    }
+
     private void ShowTripPackingList(TripData currentTrip)
     {
         var grouped = returnGroupedItemsByCategory(currentTrip);
@@ -48,6 +59,44 @@ public class PackingListUI
             AnsiConsole.WriteLine($"== {group.Key} ==");
             ListItemsInCategory(group);
             AnsiConsole.WriteLine("");
+        }
+    }
+
+    private void ShowTripShoppingList(TripData currentTrip)
+    {
+        var grouped = returnGroupedItemsByCategory(currentTrip);
+
+        //Panel For Displaying Trip Info
+        var content = new Markup(
+            "[grey]Here are the items you're still missing for: [/]\n" +
+            "[grey]──────────────────────────────────────[/]\n" +
+            $"[yellow]{currentTrip.TripType}[/] at [blue]{currentTrip.Destination}[/] on [green]{currentTrip.TripDate:yyyy-MM-dd}[/]\n"
+            );
+        var titlePanel = new Panel(content)
+            .DoubleBorder()
+            .Header("Shopping List", Justify.Center);
+
+        AnsiConsole.Write(titlePanel);
+
+        foreach (var group in grouped)
+        {
+            //Determines if prints the category or not based on if group has Unpacked items
+            var itemExists = group.FirstOrDefault(item => item.IsFullyPacked == false);
+            if (itemExists != null)
+            {
+                AnsiConsole.WriteLine($"== {group.Key} ==");
+            }
+            ListItemsToBuy(group);
+            AnsiConsole.WriteLine("");
+        }
+
+        var returnOption = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+            .AddChoices("[red]Back[/]"));
+
+        if (returnOption == "[red]Back[/]")
+        {
+            ShowSavedTripMenu(currentTrip);
         }
     }
 
@@ -69,7 +118,7 @@ public class PackingListUI
 
         var tripActionChoice = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
-            .AddChoices("Edit List", "[red]Back[/]"));
+            .AddChoices("Edit List", "Create Shopping List", "[red]Back[/]"));
         if (tripActionChoice == "[red]Back[/]")
         {
             theUI.ShowManageTripsMenu();
@@ -78,6 +127,15 @@ public class PackingListUI
         {
             EditPackingList(tripChoice);
         }
+        else if (tripActionChoice == "Create Shopping List")
+        {
+            ShowTripShoppingList(tripChoice);
+        }
+    }
+
+    private void CreateShoppingList(TripData tripData)
+    {
+        ShowTripShoppingList(tripData);
     }
 
     private void EditPackingList(TripData tripChoice)
