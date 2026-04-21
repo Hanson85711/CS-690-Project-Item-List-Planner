@@ -459,6 +459,12 @@ public class ConsoleUI
         {
             message = $"Currently Modifying # Required of: {selected.Name} ({selected.QuantityPacked}/{selected.QuantityToPack})";
             updateAction = q => selected.QuantityToPack = q;
+
+            //Changes quantityPrompt to have input validation for this choice
+            quantityPrompt = new TextPrompt<int>("Enter the new total required:")
+            .Validate(q => q > 0
+            ? ValidationResult.Success()
+            : ValidationResult.Error("[red]Value must be greater than 0[/]"));
         }
 
         //Actions gets executed here
@@ -471,6 +477,7 @@ public class ConsoleUI
         ShowSavedTripMenu(tripData);
     }
 
+    //Function for showing adding item menu logic to packinglist
     private void AddItem(TripData tripData)
     {
         string itemName = AnsiConsole.Ask<string>("What's the [green]name[/] of your item?");
@@ -488,7 +495,13 @@ public class ConsoleUI
 
         ItemCategory categorySelected = AnsiConsole.Prompt(categoryChoices);
 
-        int itemsToPack = AnsiConsole.Ask<int>("What's the [green]total amount to pack[/] for your item?");
+        int itemsToPack = AnsiConsole.Prompt(new TextPrompt<int>("Enter quantity to pack:")
+        .Validate(quantityToAdd =>
+        {
+            return quantityToAdd > 0
+                ? ValidationResult.Success()
+                : ValidationResult.Error("[red]Value must be greater than 0[/]");
+        }));
 
         if (itemListManager.itemListData != null)
         {
