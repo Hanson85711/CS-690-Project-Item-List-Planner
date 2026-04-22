@@ -79,7 +79,7 @@ public class InventoryUI
                 ChangeItemQuantity();
                 break;
             case "Delete Item":
-                Console.WriteLine("Delete Item");
+                ShowDeleteItem();
                 break;
             case "[red]Back[/]":
                 theUI.ShowMainMenu();
@@ -195,7 +195,7 @@ public class InventoryUI
 
         // Shared prompt
         var quantityPrompt = new TextPrompt<int>("Enter the new quantity:");
-        
+
         //Sets action to take after selection prompt
         string message;
         Action<int> updateAction;
@@ -216,6 +216,77 @@ public class InventoryUI
         updateAction(newQuantity);
 
         inventoryManager.ReWriteFile();
+        ShowInventoryMenu();
+    }
+
+
+    private void ShowDeleteItem()
+    {
+        var grouped = returnGroupedItemsByCategory();
+
+        //Selection Prompt
+        var categoryToChange = new SelectionPrompt<object>()
+            .Title("[green]Select a Category[/]");
+
+        var itemToChange = new SelectionPrompt<object>()
+            .Title("[green]Select item to delete[/]")
+            .UseConverter(item =>
+            {
+                var i = (InventoryItem)item;
+
+                return $"- {i.Name} ({i.Quantity})";
+            });
+
+
+        //Adds categories to list
+        foreach (var group in grouped)
+        {
+            categoryToChange.AddChoice(group.Key);
+            AnsiConsole.WriteLine("");
+        }
+
+        categoryToChange.AddChoice("[red]Back[/]");
+
+        //If Inventory List is empty, force returns and ends function
+        if (!grouped.Any())
+        {
+            AnsiConsole.MarkupLine("[red]No items available to edit. Add some items first.[/]");
+            ShowInventoryMenu();
+            return;
+        }
+
+        //Prompts user to select a category
+        var categorySelected = AnsiConsole.Prompt(categoryToChange);
+        // If user selected the back option
+        if (categorySelected is string)
+        {
+            ShowInventoryMenu();
+            return;
+        }
+        //Grabs Group based on Category Chosen
+        var itemGroup = grouped.FirstOrDefault(g => g.Key == (ItemCategory)categorySelected);
+
+        //Adds Items From Selected Category To Choices
+        if (itemGroup != null)
+        {
+            foreach (var item in itemGroup)
+            {
+                itemToChange.AddChoice(item);
+            }
+
+        }
+
+        // Prompt user to select item
+        InventoryItem selected = (InventoryItem)AnsiConsole.Prompt(itemToChange);
+
+        if (inventoryManager.inventoryList != null)
+        {
+            int itemIndex = inventoryManager.inventoryList.IndexOf(selected);
+
+            inventoryManager.inventoryList.Remove(selected);
+            inventoryManager.ReWriteFile();
+        }
+
         ShowInventoryMenu();
     }
 }
