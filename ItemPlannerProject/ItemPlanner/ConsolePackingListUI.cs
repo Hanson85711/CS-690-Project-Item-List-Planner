@@ -102,6 +102,7 @@ public class PackingListUI
 
         AnsiConsole.Write(titlePanel);
         var inventoryGroups = inventoryUI.returnGroupedItemsByCategory();
+        var inventoryDict = inventoryGroups.ToDictionary(g => g.Key);
 
         foreach (var group in grouped)
         {
@@ -111,9 +112,15 @@ public class PackingListUI
             {
                 AnsiConsole.WriteLine($"== {group.Key} ==");
             }
-            var targetGroup = inventoryGroups.FirstOrDefault(g => g.Key == group.Key);
-            ListItemsToBuy(group, targetGroup);
-            AnsiConsole.WriteLine("");
+            if (inventoryDict.TryGetValue(group.Key, out var targetGroup))
+            {
+                ListItemsToBuy(group, targetGroup);
+            }
+            else
+            {
+                ListItemsToBuy(group, Enumerable.Empty<InventoryItem>());
+            }
+
         }
 
         var returnOption = AnsiConsole.Prompt(
