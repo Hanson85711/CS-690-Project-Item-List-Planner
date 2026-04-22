@@ -80,7 +80,7 @@ public class PackingListUI
         var grouped = returnGroupedItemsByCategory(currentTrip);
         foreach (var group in grouped)
         {
-            AnsiConsole.WriteLine($"== {group.Key} ==");
+            AnsiConsole.WriteLine($"[blue]== {group.Key} ==[/]");
             ListItemsInCategory(group);
             AnsiConsole.WriteLine("");
         }
@@ -110,7 +110,7 @@ public class PackingListUI
             var itemExists = group.FirstOrDefault(item => item.IsFullyPacked == false);
             if (itemExists != null)
             {
-                AnsiConsole.WriteLine($"== {group.Key} ==");
+                AnsiConsole.WriteLine($"[blue]== {group.Key} ==[/]");
             }
             if (inventoryDict.TryGetValue(group.Key, out var targetGroup))
             {
