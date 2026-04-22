@@ -9,11 +9,17 @@ public class PackingListUI
 {
     private ItemListManager itemListManager;
     private ConsoleUI theUI;
+    private InventoryUI? inventoryUI;
 
     public PackingListUI(ItemListManager itemListManager, ConsoleUI theUI)
     {
         this.itemListManager = itemListManager;
         this.theUI = theUI;
+    }
+
+    public void SetInventoryUI(InventoryUI invenUI)
+    {
+        this.inventoryUI = invenUI;
     }
     private IEnumerable<IGrouping<ItemCategory, PackingItem>> returnGroupedItemsByCategory(TripData tripChoice)
     {
@@ -40,15 +46,33 @@ public class PackingListUI
         }
     }
 
-    private void ListItemsToBuy(IEnumerable<PackingItem> items)
+    private void ListItemsToBuy(IEnumerable<PackingItem> items, IEnumerable<InventoryItem> inventoryItems)
     {
         foreach (var item in items)
         {
             if (!item.IsFullyPacked)
             {
-                AnsiConsole.MarkupLine($"- {item.Name} ({item.QuantityToPack - item.QuantityPacked})");
+                string itemNameCleaned = Normalize(item.Name);
+
+                var matchInvenItem = inventoryItems.FirstOrDefault(inv => Normalize(inv.Name) == itemNameCleaned);
+
+                if (matchInvenItem != null)
+                {
+                    //Match found in inventory
+                    AnsiConsole.MarkupLine($"- {item.Name} ({item.QuantityToPack - item.QuantityPacked}) [green]- {matchInvenItem.Quantity}x {item.Name} found in inventory [/]");
+                }
+                else
+                {
+                    // No match found
+                    AnsiConsole.MarkupLine($"- {item.Name} ({item.QuantityToPack - item.QuantityPacked})");
+                }
             }
         }
+    }
+
+    private string Normalize(string name)
+    {
+        return name.Replace(" ", "").ToLower();
     }
 
     private void ShowTripPackingList(TripData currentTrip)
@@ -77,6 +101,7 @@ public class PackingListUI
             .Header("Shopping List", Justify.Center);
 
         AnsiConsole.Write(titlePanel);
+        var inventoryGroups = inventoryUI.returnGroupedItemsByCategory();
 
         foreach (var group in grouped)
         {
@@ -86,7 +111,8 @@ public class PackingListUI
             {
                 AnsiConsole.WriteLine($"== {group.Key} ==");
             }
-            ListItemsToBuy(group);
+            var targetGroup = inventoryGroups.FirstOrDefault(g => g.Key == group.Key);
+            ListItemsToBuy(group, targetGroup);
             AnsiConsole.WriteLine("");
         }
 
