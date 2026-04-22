@@ -64,3 +64,14 @@ public class PackingListSaver : FileSaverBase
         File.AppendAllText(FileName, line + Environment.NewLine);
     }
 }
+
+public class InventoryListSaver : FileSaverBase
+{
+    public InventoryListSaver(string fileName) : base(fileName) { }
+
+    public void AppendData(InventoryItem data)
+    {
+        var line = $"{data.Name}|{data.Quantity}|{data.Category}";
+        File.AppendAllText(FileName, line + Environment.NewLine);
+    }
+}

@@ -56,3 +56,20 @@ public class PackingItem
         this.Category = category;
     }
 }
+
+public class InventoryItem
+{
+    public string Name { get; set; } = "";
+    public int Quantity { get; set; } = 0;
+    public ItemCategory Category { get; set; }
+
+    // AutoCalculated bool
+    public bool IsOutOfStock => Quantity > 0;
+
+    public InventoryItem(string name, int quantity, ItemCategory category)
+    {
+        this.Name = name;
+        this.Quantity = quantity;
+        this.Category = category;
+    }
+}

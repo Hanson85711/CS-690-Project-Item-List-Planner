@@ -133,11 +133,6 @@ public class PackingListUI
         }
     }
 
-    private void CreateShoppingList(TripData tripData)
-    {
-        ShowTripShoppingList(tripData);
-    }
-
     private void EditPackingList(TripData tripChoice)
     {
         itemListManager.ReadFile(tripChoice.ItemListName);

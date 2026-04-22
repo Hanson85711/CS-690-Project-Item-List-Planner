@@ -54,11 +54,13 @@ TemporaryDependencyNodeTargetIdentifier=net10.0
 /warnaserror+:NU1605,SYSLIB0011
 
 [sourceFiles]
+ConsoleInventoryListUI.cs
 ConsolePackingListUI.cs
 ConsoleUI.cs
 DataManager.cs
 Domain.cs
 FileSaver.cs
+InventoryManager.cs
 obj/Debug/net10.0/
  .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
  ItemPlanner.AssemblyInfo.cs
