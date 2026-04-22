@@ -17,7 +17,7 @@ public class InventoryUI
     }
 
 
-    private IEnumerable<IGrouping<ItemCategory, InventoryItem>> returnGroupedItemsByCategory()
+    public IEnumerable<IGrouping<ItemCategory, InventoryItem>> returnGroupedItemsByCategory()
     {
         IEnumerable<IGrouping<ItemCategory, InventoryItem>> grouped;
         if (!string.IsNullOrEmpty(inventoryManager.InventoryFileName))

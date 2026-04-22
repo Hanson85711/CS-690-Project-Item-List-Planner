@@ -14,6 +14,7 @@ class Program
         
         consoleUI.SetPackingUI(packingUI);
         consoleUI.SetInventoryUI(inventoryUI);
+        packingUI.SetInventoryUI(inventoryUI);
         consoleUI.Show();
     }
 }
