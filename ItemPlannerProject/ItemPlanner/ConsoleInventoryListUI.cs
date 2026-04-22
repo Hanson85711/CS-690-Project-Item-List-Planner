@@ -45,7 +45,7 @@ public class InventoryUI
         var grouped = returnGroupedItemsByCategory();
         foreach (var group in grouped)
         {
-            AnsiConsole.WriteLine($"[blue]== {group.Key} ==[/]");
+            AnsiConsole.MarkupLine($"[blue]== {group.Key} ==[/]");
             ListInventoryItemsInCategory(group);
             AnsiConsole.WriteLine("");
         }
