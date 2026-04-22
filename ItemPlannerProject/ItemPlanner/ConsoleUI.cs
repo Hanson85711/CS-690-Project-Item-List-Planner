@@ -9,6 +9,7 @@ public class ConsoleUI
     private DataManager dataManager;
     private ItemListManager itemListManager;
     private PackingListUI? packingUI;
+    private InventoryUI? inventoryUI;
 
     public ConsoleUI(DataManager dataManager, ItemListManager itemListManager)
     {
@@ -20,13 +21,18 @@ public class ConsoleUI
     {
         this.packingUI = packingUI;
     }
+
+    public void SetInventoryUI(InventoryUI invenUI)
+    {
+        this.inventoryUI = invenUI;
+    }
     public void Show()
     {
         ShowMainMenu();
     }
 
 
-    private void ShowMainMenu()
+    public void ShowMainMenu()
     {
         //Main Menu Display
         var titlePanel = new Panel("Main Menu")
@@ -38,13 +44,25 @@ public class ConsoleUI
         AnsiConsole.WriteLine();
         var mainChoice = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
-                .AddChoices("Manage Trips", "[red]Exit[/]"));
+                .AddChoices("Manage Trips", "Manage Inventory", "[red]Exit[/]"));
 
         AnsiConsole.MarkupLine($"You selected: [yellow]{mainChoice}[/]");
 
         if (mainChoice == "Manage Trips")
         {
             ShowManageTripsMenu();
+        }
+        else if (mainChoice == "Manage Inventory")
+        {
+            if (inventoryUI != null)
+            {
+                inventoryUI.ShowInventoryMenu();
+            }
+
+            if (inventoryUI == null)
+            {
+                Console.WriteLine("Inventory UI is null. Need to fix.");
+            }
         }
     }
 
@@ -182,7 +200,15 @@ public class ConsoleUI
         else
         {
             savedTripChoice = choice.Trip;
-            packingUI.ShowSavedTripMenu(savedTripChoice);
+            if (packingUI != null)
+            {
+                packingUI.ShowSavedTripMenu(savedTripChoice);
+            }
+
+            if (packingUI == null)
+            {
+                Console.WriteLine("PackingUI is null. Code Logic needs to be fixed");
+            }
         }
     }
 
